@@ -20,11 +20,11 @@ class Problem:
 
         self._type = self._json['type']
 
-    def set_answer(self, ans):
+    def set_answer(self, ans): # эта функция для сохранения ответа
         self._answer = ans
 
-    def rate(self):
-        if self._type == 'test1':
+    def rate(self): # эта функция для проверка ответа
+        if self._type == 'test':
             if self._answer == self._right_answer:
                 self._mark = self._max_mark
 
