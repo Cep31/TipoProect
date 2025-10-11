@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.ttk import *
 
+# под снос
 
 def Wcollor(res):
     if res == 3:#типо макс балл

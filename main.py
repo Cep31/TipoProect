@@ -4,7 +4,7 @@ from tkinter.ttk import *
 from object.FrameHandler import FrameHandler
 
 root = Tk()
-root.geometry("450x900")
+root.geometry("410x900")
 
 frameHandler = FrameHandler(root)
 frameHandler.show_main()
