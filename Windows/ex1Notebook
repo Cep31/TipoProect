@@ -1,0 +1,48 @@
+import tkinter as tk
+from tkinter import ttk
+
+class ex1Notebook:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Задача№1")
+        self.root.geometry("500x300")
+
+        self.style = ttk.Style()
+
+        self.setup_tab_styles()
+
+        self.notebook = ttk.Notebook(root)
+        self.notebook.pack(fill='both', expand=True, padx=10, pady=10)
+
+        self.create_colored_tabs()
+
+    def setup_tab_styles(self):#Настройка стилей для цветных ярлыков вкладок
+        self.style.configure('TNotebook.Tab')
+
+        self.style.configure('red.TNotebook.Tab', background='red',)
+
+        self.style.configure('green.TNotebook.Tab', background='green',)
+
+    def create_colored_tabs(self):#создание содержимого
+        exercises1=["какаято задача из первого","другая задача из первого"]
+        for i in range(2):  # берем из того масива нулями и с вар
+            tab = ttk.Frame(self.notebook, style='green.TNotebook')
+            tab.pack(expand=True)
+            self.notebook.add(tab, text=f'задание{i + 1}')
+
+            zadanie = tk.Text(tab, font=('Arial', 12), height=8)
+            zadanie.pack(fill='both', expand=True, padx=10, pady=10)
+            zadanie.insert('1.0', exercises1[i])
+
+            answer = tk.Entry(tab)  # поле ввода ответа
+            answer.pack(anchor="nw", expand=True, pady=10)
+
+            otvet = tk.Button(tab, text="Ответить")  # кнопка ответить, сюда надо с помощью answer.get() в функции записать ответ и проверить его
+            otvet.pack(anchor="se", padx=5, pady=5)
+
+
+        self.notebook.configure(style='TNotebook')
+
+root = tk.Tk()
+app = ex1Notebook(root)
+root.mainloop()
