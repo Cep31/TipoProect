@@ -1,14 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
 
+answers1=[]
 class ex1Notebook:
     def __init__(self, root):
         self.root = root
         self.root.title("Задача№1")
-        self.root.geometry("500x300")
+        self.root.geometry("800x1200")
 
         self.style = ttk.Style()
-
         self.setup_tab_styles()
 
         self.notebook = ttk.Notebook(root)
@@ -16,32 +16,47 @@ class ex1Notebook:
 
         self.create_colored_tabs()
 
-    def setup_tab_styles(self):#Настройка стилей для цветных ярлыков вкладок
-        self.style.configure('TNotebook.Tab')
-
-        self.style.configure('red.TNotebook.Tab', background='red',)
-
-        self.style.configure('green.TNotebook.Tab', background='green',)
+    def setup_tab_styles(self):
+        # Создаем общий стиль для всех вкладок с цветами
+        self.style.configure('TNotebook.Tab',
+                             padding=[15, 5],
+                             background='lightblue') # общий цвет для всех вкладок
 
     def create_colored_tabs(self):#создание содержимого
-        exercises1=["какаято задача из первого","другая задача из первого"]
-        for i in range(2):  # берем из того масива нулями и с вар
-            tab = ttk.Frame(self.notebook, style='green.TNotebook')
-            tab.pack(expand=True)
-            self.notebook.add(tab, text=f'задание{i + 1}')
+        exercises1 = ["какая-то задача из первого", "другая задача из первого", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"]
 
-            zadanie = tk.Text(tab, font=('Arial', 12), height=8)
-            zadanie.pack(fill='both', expand=True, padx=10, pady=10)
+        for i in range(10):
+            tab = ttk.Frame(self.notebook)
+
+            self.notebook.add(tab, text={i + 1})
+
+            zadanie_frame = ttk.Frame(tab)
+            zadanie_frame.pack(fill='both', expand=True, padx=10, pady=10)
+
+            zadanie = tk.Text(zadanie_frame, font=('Arial', 12), height=15, wrap='word')#делаем текст задачи
+            zadanie.pack(fill='both', expand=True)
             zadanie.insert('1.0', exercises1[i])
+            zadanie.config(state='disabled')
 
-            answer = tk.Entry(tab)  # поле ввода ответа
-            answer.pack(anchor="nw", expand=True, pady=10)
+            answer_frame = ttk.Frame(tab)
+            answer_frame.pack(fill='x', padx=10, pady=10)
 
-            otvet = tk.Button(tab, text="Ответить")  # кнопка ответить, сюда надо с помощью answer.get() в функции записать ответ и проверить его
-            otvet.pack(anchor="se", padx=5, pady=5)
+            otvet_ukaz = ttk.Label(answer_frame, text="Ответ:", font=('Arial', 12))#"Ответ:"
+            otvet_ukaz.pack(side='left', padx=(0, 10))
 
+            answer = ttk.Entry(answer_frame, font=('Arial', 12), width=40)#поле ввода ответа
+            answer.pack(side='left', fill='x', expand=True, padx=(0, 10))
 
-        self.notebook.configure(style='TNotebook')
+            otvet = ttk.Button(answer_frame,text="Ответить", command=lambda idx=i, ans=answer: self.get_answer(idx, ans))#ответ
+            otvet.pack(side='right')
+
+    def get_answer(self, task_index, answer):#получаем отвтет
+        user_answer = answer.get()
+
+        if not user_answer:
+            result_label.config(text="Введите ответ!")
+            return
+        answers1.append(user_answer)
 
 root = tk.Tk()
 app = ex1Notebook(root)
