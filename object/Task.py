@@ -4,10 +4,10 @@ import tkinter as tk
 from tkinter import PhotoImage
 
 
-class Problem:
-    def __init__(self, id):
-        self._ID = id
-        self._path = fr'{os.getcwd()}\catalog\{id}'
+class Task:
+    def __init__(self, ID):
+        self._ID = ID
+        self._path = fr'{os.getcwd()}\catalog\{self._ID}'
 
         with open(self._path + '\\problem.json', 'r') as file:
             self._json = json.load(file)

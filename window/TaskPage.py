@@ -1,11 +1,20 @@
 import tkinter as tk
 from tkinter import ttk
+from object.Task import Task
 
 answers1=[]
-class ex1Notebook:
-    def __init__(self, root):
+class TaskPage(tk.Frame):
+    def __init__(self, root, controller, tasks_id):
+        super().__init__(root)
+        # Task - это данные задания
+        self.tasks_id = tasks_id
+        self.tasks = []
+        self.controller = controller
+        for task in tasks_id:
+            self.tasks.append(Task(task))
+
         self.root = root
-        self.root.title("Задача№1")
+        self.root.title("Задачи")
         self.root.geometry("800x1200")
 
         self.style = ttk.Style()
@@ -16,6 +25,7 @@ class ex1Notebook:
 
         self.create_colored_tabs()
 
+
     def setup_tab_styles(self):
         # Создаем общий стиль для всех вкладок с цветами
         self.style.configure('TNotebook.Tab',
@@ -25,7 +35,7 @@ class ex1Notebook:
     def create_colored_tabs(self):#создание содержимого
         exercises1 = ["какая-то задача из первого", "другая задача из первого", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"]
 
-        for i in range(10):
+        for i in range():
             tab = ttk.Frame(self.notebook)
 
             self.notebook.add(tab, text={i + 1})
@@ -54,10 +64,10 @@ class ex1Notebook:
         user_answer = answer.get()
 
         if not user_answer:
-            result_label.config(text="Введите ответ!")
+            # result_label.config(text="Введите ответ!")
             return
         answers1.append(user_answer)
 
-root = tk.Tk()
-app = ex1Notebook(root)
-root.mainloop()
+# root = tk.Tk()
+# app = ex1Notebook(root)
+# root.mainloop()
