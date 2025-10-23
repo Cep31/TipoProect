@@ -1,7 +1,7 @@
 from tkinter import *
-from tkinter.ttk import *
+from tkinter import ttk
 
-class MainPage(Frame):
+class MainPage(ttk.Frame):
     def __init__(self, root, controller):
         super().__init__(root)
         self.tasks_count = []
@@ -16,7 +16,7 @@ class MainPage(Frame):
         for i in range(len(names)):
             self.tasks_count.append(IntVar())
             self.tasks_count[i].set(0)
-            frame = Frame(self, borderwidth=3, relief=SOLID, padding=[1, 2])
+            frame = ttk.Frame(self, borderwidth=3, relief=SOLID, padding=[1, 2])
             exercises = Label(frame, text=names[i], font=("Arial", 10, 'bold'))
             kol_problems = Spinbox(frame, from_=0, to=100, textvariable=self.tasks_count[i])
             exercises.pack(side=LEFT)

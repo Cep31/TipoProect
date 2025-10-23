@@ -1,8 +1,5 @@
 import json
 import os
-import tkinter as tk
-from tkinter import PhotoImage
-
 
 class Task:
     def __init__(self, ID):
@@ -34,6 +31,5 @@ class Task:
     def get_mark(self):
         return self._mark
 
-    def get_photo(self):
-        image = PhotoImage(file = self._path + '\\cond.png')
-        return image
+    def get_path(self):
+        return self._path + '\\cond.png'

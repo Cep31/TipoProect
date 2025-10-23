@@ -2,9 +2,10 @@ import random
 from tkinter import *
 from tkinter import ttk
 
+from window.DetailedTaskPage import DetailedTaskPage
 from window.FinishPage import FinishPage
 from window.MainPage import MainPage
-from window.TaskPage import TaskPage
+from window.TestTaskPage import TestTaskPage
 
 class FrameController:
     def __init__(self, root: Tk):
@@ -26,7 +27,7 @@ class FrameController:
         for type_task in tasks_count:
             for i in range(type_task):
                 id = f'{(type_task + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 1):03}'
-                task = TaskPage(self.tasks_nb, self, id)
+                task = DetailedTaskPage(self.tasks_nb, self, id)
                 self.tasks.append(task)
                 self.tasks_nb.add(task, text=str(counter))
                 counter += 1
@@ -49,10 +50,10 @@ class FrameController:
 
     def show_main(self):
         self.tasks_nb.pack_forget()
-        self.root.geometry("410x900")
+        self.root.geometry("410x950")
         self.main_page.pack()
 
     def show_tasks(self):
         self.main_page.pack_forget()
-        self.root.geometry("800x1200")
+        self.root.geometry("800x1000")
         self.tasks_nb.pack(fill='both', expand=True, padx=10, pady=10)

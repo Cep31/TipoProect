@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from object.Task import Task
 
-class TaskPage(tk.Frame):
+class TestTaskPage(ttk.Frame):
     def __init__(self, notebook, controller, task_id):
         self.notebook = notebook
         super().__init__(self.notebook)
