@@ -2,22 +2,22 @@ import random
 from tkinter import *
 from tkinter import ttk
 
+from object.ScrollableNotebook import ScrollableNotebook
 from window.DetailedTaskPage import DetailedTaskPage
 from window.FinishPage import FinishPage
 from window.MainPage import MainPage
 from window.TestTaskPage import TestTaskPage
+from object.Task import Task
 
 class FrameController:
     def __init__(self, root: Tk):
         self.root = root
 
-        self.tasks = [] # Здесь хранятся ID
-
         self.main_page = MainPage(self.root, self)
         self.main_page.pack()
 
         self.tasks = []
-        self.tasks_nb = ttk.Notebook(root)
+        self.tasks_nb = ScrollableNotebook(root, visible_tabs=15)
         self.finish_page = FinishPage(self)
 
     def generate_problems_on_click(self):
@@ -27,9 +27,15 @@ class FrameController:
         for type_task in tasks_count:
             for i in range(type_task):
                 id = f'{(type_task + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 1):03}'
-                task = DetailedTaskPage(self.tasks_nb, self, id)
-                self.tasks.append(task)
-                self.tasks_nb.add(task, text=str(counter))
+                task = Task(id)
+                if task.get_type() == "test":
+                    task_page = TestTaskPage(self.tasks_nb, self, id)
+                elif task.get_type() == "detailed":
+                    task_page = DetailedTaskPage(self.tasks_nb, self, id)
+                else:
+                    raise EXCEPTION
+                self.tasks.append(task_page)
+                self.tasks_nb.add(task_page, text=str(counter))
                 counter += 1
 
         last_tab = ttk.Frame(self.tasks_nb)

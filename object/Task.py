@@ -33,3 +33,6 @@ class Task:
 
     def get_path(self):
         return self._path + '\\cond.png'
+
+    def get_type(self):
+        return self._type

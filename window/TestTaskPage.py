@@ -7,7 +7,7 @@ class TestTaskPage(ttk.Frame):
         self.notebook = notebook
         super().__init__(self.notebook)
 
-        self.task = Task(task_id)
+        #self.task = Task(task_id)
         self.controller = controller
 
         self.style = ttk.Style()
