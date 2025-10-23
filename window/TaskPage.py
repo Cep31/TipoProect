@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import PhotoImage
 from object.Task import Task
+from tkinter import filedialog, messagebox
+from PIL import Image, ImageTk #pip install Pillow
+import os
 
 answers=[[],[],[],[],[],[],[],[],[],[],[],[]]#делаю матрицу в которой будут ответы пользователя на задачи
 
@@ -22,6 +25,12 @@ class TaskPage(tk.Frame):
         self.notebook.pack(fill='both', expand=True, padx=10, pady=10)
 
         self.create_tab_1()  # создаем все табы, оно у меня не заработало на классах, поэтому все в таск запихну
+
+        self.root.resizable(True, True)
+        self.current_image = None#картинки пользователя
+        self.image_path = None
+        self.create_tab_13()
+
         self.create_last_tab()
 
     def setup_tab_styles(self):
@@ -41,9 +50,7 @@ class TaskPage(tk.Frame):
                 zadanie_frame = ttk.Frame(tab)
                 zadanie_frame.pack(fill='both', expand=True, padx=10, pady=10)
 
-                gp = Task()#я постарался разобраться как фуекцию вызвать чтоб фото взять, че-то сделал
-                zadanie = gp.get_photo()
-                image_label = ttk.Label(zadanie_frame, image=zadanie)
+                image_label = ttk.Label(zadanie_frame, image=tasks[i])#тут фото, надо вместо tasks сделать название фото
                 image_label.pack()
 
                 answer_frame = ttk.Frame(tab)
@@ -65,6 +72,73 @@ class TaskPage(tk.Frame):
             # result_label.config(text="Введите ответ!")
             return
         answers[0].append(user_answer)
+
+    #дальше бога нет, или танцы с бубном для задач 13-19 с загрузкой фото
+    #pip install Pillow
+    def create_tab_13(self):
+        tab = ttk.Frame(self.root, padding=20)
+        tab.pack(fill='both', expand=True)
+
+        zadanie_frame = ttk.Frame(tab, padding=20)
+        zadanie_frame.pack(fill='both', expand=True)
+
+        zadanie_label = ttk.Label(zadanie_frame, text="<zadanie zadaniizaanie/.,kphsipfjpsodjvjkajvpkihb'kihspjovjspvipnwipvnpwijvipwnnihweifiowejfiwefioweo]iwehfgwejwejbvweuob]uovbwuevenioweuvbbweoubvuweibvbowuevuiwebbovubweighwe0ingwqho", font="Arial 14")
+        zadanie_label.pack(fill='both', expand=True)#задание, вместо этой фигни фото
+
+        answer_frame = ttk.Frame(tab)
+        answer_frame.pack(fill='x', padx=10, pady=10)
+        upload_photo_otveta = ttk.Button(answer_frame, text="Выбрать фото", command=self.upload_photo)
+        upload_photo_otveta.pack(anchor='w', pady=10)
+
+        self.image_frame = ttk.LabelFrame(answer_frame, text="Предпросмотр", padding=10)#отображение фото
+        self.image_frame.pack(fill='both', expand=True, pady=10)
+
+        self.image_label = ttk.Label(self.image_frame, text="Фото не выбрано", font=('Arial', 12), foreground='gray')#пока пользовательского фото не тбудет это
+        self.image_label.pack(expand=True)
+
+        info_frame = ttk.Frame(answer_frame)
+        info_frame.pack(fill='x', pady=10)
+
+        self.info_label = ttk.Label(info_frame, text="", font=('Arial', 10))
+        self.info_label.pack()
+
+        clear_btn = ttk.Button(answer_frame, text="Очистить", command=self.clear_photo)#кнопка очистки
+        clear_btn.pack(anchor='w', pady=5)
+
+    def upload_photo(self):  #запрашиваем фото
+        file_types = [('Изображения', '*.jpg *.jpeg *.png *.gif *.bmp *.tiff'), ('JPEG', '*.jpg *.jpeg'),
+                      ('PNG', '*.png'), ('Все файлы', '*.*')]
+
+        file_path = filedialog.askopenfilename(title="Выберите фото", filetypes=file_types)
+
+        if file_path:
+            self.load_image(file_path)
+
+    def load_image(self, file_path): #загружаем фото
+        try:
+            image = Image.open(file_path)
+            self.image_path = file_path
+            file_size = os.path.getsize(file_path) / 1024  # в КБ
+            file_name = os.path.basename(file_path)
+            image_size = image.size
+            info_text = (f"Файл: {file_name}\n"
+                         f"Размер: {file_size:.1f} КБ\n"
+                         f"Разрешение: {image_size[0]}x{image_size[1]}")
+            self.info_label.config(text=info_text)
+            max_size = (400, 300)
+            image.thumbnail(max_size, Image.Resampling.LANCZOS)
+            self.current_image = ImageTk.PhotoImage(image)
+            self.image_label.config(image=self.current_image, text="")
+
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось загрузить изображение:\n{str(e)}")
+
+    def clear_photo(self): #уничтожаем фото
+        self.current_image = None
+        self.image_path = None
+        self.image_label.config(image='', text="Фото не выбрано")
+        self.info_label.config(text="")
+
 
     def create_last_tab(self):
         tab = ttk.Frame(self.notebook)
