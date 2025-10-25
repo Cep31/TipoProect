@@ -23,10 +23,12 @@ class DetailedTaskPage(ttk.Frame):
         self.create_tab()#создаем все табы, оно у меня не заработало на классах, поэтому все в таск запихну
 
     def setup_tab_styles(self):
-        # Создаем общий стиль для всех вкладок с цветами
-        self.style.configure('TNotebook.Tab',
-                             padding=[15, 5],
-                             background='lightblue')  # общий цвет для всех вкладок
+#скопировал вставил активные вкладки из ответа с консультации, должно работать по сути
+        self.style.theme_use("clam")
+
+        self.style.configure("Custom.TNotebook.Tab", padding=[10, 5], font=('Arial', 12), background="lightgray")  # цвет неактивных вкладок
+
+        self.style.map("Custom.TNotebook.Tab", background=[("selected", "#f8c8c8")], font=[("selected", ('Arial', 12, 'bold'))])  # для активной вкладки
 
     def rate(self):
         print(123)
