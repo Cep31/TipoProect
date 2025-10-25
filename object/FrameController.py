@@ -23,11 +23,16 @@ class FrameController:
     def generate_problems_on_click(self):
         tasks_count = self.main_page.get_tasks_count()
         counter = 1
+        tasks_id = []
 
-        for type_task in tasks_count:
-            for i in range(type_task):
-                id = f'{(type_task + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 1):03}'
-                task = Task(id)
+        for i in range(len(tasks_count)):
+            for j in range(tasks_count[i]):
+                task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 1):03}'
+                while task_id in tasks_id:
+                    task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 999):03}'
+                tasks_id.append(task_id)
+
+                task = Task(task_id)
                 if task.get_type() == "test":
                     task_page = TestTaskPage(self.tasks_nb, self, id)
                 elif task.get_type() == "detailed":

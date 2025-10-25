@@ -7,7 +7,7 @@ class TestTaskPage(ttk.Frame):
         self.notebook = notebook
         super().__init__(self.notebook)
 
-        #self.task = Task(task_id)
+        self.task = Task(task_id)
         self.controller = controller
 
         self.style = ttk.Style()
@@ -44,5 +44,5 @@ class TestTaskPage(ttk.Frame):
 
     def rate(self):
         print(123)
-        self.task.rate()
+        self.task.rate(self.answer.get())
         # ... дальше расписывай

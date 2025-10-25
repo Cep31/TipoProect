@@ -12,7 +12,7 @@ class DetailedTaskPage(ttk.Frame):
         self.notebook = notebook
         super().__init__(self.notebook, padding=20)
 
-        #self.task = Task(task_id)
+        self.task = Task(task_id)
         self.controller = controller
 
         self.style = ttk.Style()
@@ -32,7 +32,7 @@ class DetailedTaskPage(ttk.Frame):
 
     def rate(self):
         print(123)
-        self.task.rate()
+        self.task.rate(1)
         # ... дальше расписывай
 
     #дальше бога нет, или танцы с бубном для задач 13-19 с загрузкой фото

@@ -6,23 +6,23 @@ class Task:
         self._ID = ID
         self._path = fr'{os.getcwd()}\catalog\{self._ID}'
 
+        if not os.path.exists(self._path):
+            self._ID = "01_01_001"
+            self._path = fr'{os.getcwd()}\catalog\01_01_001'
+
         with open(self._path + '\\problem.json', 'r') as file:
-            self._json = json.load(file)
+                self._json = json.load(file)
 
         self._right_answer = self._json['answer']
         self._max_mark = self._json['max_mark']
 
-        self._answer = 0
         self._mark = 0
 
         self._type = self._json['type']
 
-    def set_answer(self, ans): # эта функция для сохранения ответа
-        self._answer = ans
-
-    def rate(self): # эта функция для проверка ответа
+    def rate(self, answer): # эта функция для проверка ответа
         if self._type == 'test':
-            if self._answer == self._right_answer:
+            if answer == self._right_answer:
                 self._mark = self._max_mark
 
     def get_answer(self):
