@@ -11,8 +11,9 @@ class TaskPage13(ctk.CTkFrame):
         ctk.set_appearance_mode("dark")#делаем красоту
         ctk.set_default_color_theme("blue")
 
-        self.image_answers = []  #хранениt всех картинок пользователя
+        self.image_answers = []  #хранениt все картинrb пользователя
         self.current_image_index = -1  #индекс текущей картинки
+        self.image_answers_id =[]#хранит путь к фото пользователя
         self.current_image = None  #текущяя картинка
 
         self.create_tab_13()
@@ -96,7 +97,6 @@ class TaskPage13(ctk.CTkFrame):
                 self.show_current_image()
 
     def load_image(self, file_path):#добавляем картинку в масив
-        image_answers_otobr =[]
         try:
             image = Image.open(file_path)
             file_info = {
@@ -106,11 +106,11 @@ class TaskPage13(ctk.CTkFrame):
                 'size': os.path.getsize(file_path) / 1024,  # в КБ
                 'resolution': image.size
             }
-            self.image_answers_otobr.append(file_info)
+            self.image_answers.append(file_info)
             file_info_answers = {
                 'path': file_path
             }
-            self.image_answers.append(file_info_answers)
+            self.image_answers_id.append(file_info_answers)
 
             self.update_controls_state()#активируем кнопки управления
 
