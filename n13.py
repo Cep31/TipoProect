@@ -130,7 +130,7 @@ class TaskPage13(ctk.CTkFrame):
 
             # Создаем превью изображения
             image = file_info['image'].copy() # Создаем копию для изменения размера
-            max_size = (1200, 300)
+            max_size = (12000, 300)
             image.thumbnail(max_size, Image.Resampling.LANCZOS)
 
             # Конвертируем для CustomTkinter
@@ -215,4 +215,5 @@ if __name__ == "__main__":
     app.pack(fill='both', expand=True, padx=10, pady=10)
 
     root.mainloop()
+
 
