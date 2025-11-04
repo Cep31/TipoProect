@@ -1,8 +1,9 @@
 from tkinter import *
 from object.FrameController import FrameController
 from object.Autocheck import Autocheck
+import customtkinter as ctk
 
-root = Tk()
+root = ctk.CTk()
 root.geometry("410x950")
 
 frameHandler = FrameController(root)

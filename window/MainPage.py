@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import ttk
+import customtkinter as ctk
 
-class MainPage(ttk.Frame):
+class MainPage(ctk.CTkFrame):
     def __init__(self, root, controller):
         super().__init__(root)
         self.tasks_count = []
@@ -16,14 +17,14 @@ class MainPage(ttk.Frame):
         for i in range(len(names)):
             self.tasks_count.append(IntVar())
             self.tasks_count[i].set(0)
-            frame = ttk.Frame(self, borderwidth=3, relief=SOLID, padding=[1, 2])
-            exercises = Label(frame, text=names[i], font=("Arial", 10, 'bold'))
-            kol_problems = Spinbox(frame, from_=0, to=100, textvariable=self.tasks_count[i])
+            frame = ctk.CTkFrame(self, corner_radius=15)
+            exercises = ctk.CTkLabel(frame, text=names[i], font=("Arial", 10, 'bold'))
+            kol_problems = ttk.Spinbox(frame, from_=0, to=100, textvariable=self.tasks_count[i])
             exercises.pack(side=LEFT)
             kol_problems.pack(side=RIGHT)
-            frame.pack(anchor="nw", fill=X, padx=10, pady=5)
+            frame.pack(fill='both', expand=True, padx=10, pady=10)
 
-        ready = Button(self, text="Готово", command=self.ready_on_click)
+        ready = ctk.CTkButton(self, text="Готово", command=self.ready_on_click)
         ready.pack(anchor="se", padx=10, pady=50)
 
     def ready_on_click(self):

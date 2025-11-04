@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import customtkinter as ctk
 
 class ScrollableNotebook(ttk.Notebook):
     def __init__(self, master=None, visible_tabs=5, **kwargs):
@@ -42,15 +43,15 @@ class ScrollableNotebook(ttk.Notebook):
                 self.add(tab_id, text=self.tab(tab_id, "text"))
 
 
-# root = tk.Tk()
+# root = ctk.CTk()
 # root.geometry("500x300")
 #
 # notebook = ScrollableNotebook(root)
 # notebook.pack(expand=True, fill="both")
 #
 # for i in range(12):
-#     frame = tk.Frame(notebook, bg=f"#{(i*2):02x}{(255-i*10):02x}{(i*15)%255:02x}")
-#     tk.Label(frame, text=f"страница {i+1}", bg=frame["bg"]).pack(expand=True)
+#     frame = ctk.CTkFrame(notebook, bg=f"#{(i*2):02x}{(255-i*10):02x}{(i*15)%255:02x}")
+#     ctk.CTkLabel(frame, text=f"страница {i+1}", bg=frame["bg"]).pack(expand=True)
 #     notebook.add(frame, text=f"вкладка {i+1}")
 #
 # root.mainloop()

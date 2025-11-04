@@ -25,9 +25,6 @@ class Task:
             if answer == self._right_answer:
                 self._mark = self._max_mark
 
-    def get_answer(self):
-        return self._answer
-
     def get_mark(self):
         return self._mark
 
