@@ -13,7 +13,7 @@ class FrameController:
     def __init__(self, root: Tk):
         self.root = root
 
-        self.main_page = MainPage(self.root, self)
+        self.main_page = MainPage(root, self)
         self.task_page = TaskPage(root, self)
 
         self.show_main()
@@ -24,17 +24,16 @@ class FrameController:
 
         for i in range(len(tasks_count)):
             for j in range(tasks_count[i]):
-                task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 999):03}'
+                task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 3):03}'
                 while task_id in tasks_id:
-                   task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 999):03}'
+                   task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 3):03}'
                 tasks_id.append(task_id)
                 self.task_page.add_tab(Task(task_id))
 
         self.show_tasks()
 
-    # def rate_all(self):
-    #     for i in self.tasks:
-    #         i.rate()
+    def rate(self):
+        self.task_page.rate()
 
     def show_main(self):
         self.task_page.pack_forget()

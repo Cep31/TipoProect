@@ -57,6 +57,8 @@ class TestTab(ctk.CTkFrame):
         )
         self.task_image.configure(image=ctk_image, text="", fg_color="transparent")
 
+    def get_answer(self):
+        return int(self.answer.get())
 
 # root = ctk.CTk()
 # root.title("Задача №1")
