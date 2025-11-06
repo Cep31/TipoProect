@@ -1,0 +1,6 @@
+{
+  "id": "13_01_003",
+  "type": "detailed",
+  "image": "cond.png",
+  "max_mark": 2
+}

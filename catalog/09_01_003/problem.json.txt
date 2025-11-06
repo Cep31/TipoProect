@@ -1,0 +1,7 @@
+{
+  "id": "09_01_003",
+  "type": "test",
+  "image": "cond.png",
+  "answer": 4,5,
+  "max_mark": 1
+}

@@ -24,7 +24,7 @@ class FrameController:
 
         for i in range(len(tasks_count)):
             for j in range(tasks_count[i]):
-                task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 1):03}'
+                task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 999):03}'
                 while task_id in tasks_id:
                    task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 999):03}'
                 tasks_id.append(task_id)

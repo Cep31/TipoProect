@@ -29,11 +29,6 @@ class DetailedTab(ctk.CTkFrame):
         task_frame = ctk.CTkFrame(tab, corner_radius=10)#фрейм для задания
         task_frame.pack(fill='both', expand=True, pady=(0, 10))
 
-        # self.zadanie_text = ("<zadanie zadaniizaanie/.,kphsipfjpsodjvjkajvpkihb'kihspjovjspvipnwipvnpwijvipwnnihweifiowejfiwefioweoiwehfgwejwejbvweuob]uovbwuevenioweuvbbweoubvuweibvbowuevuiwebbovubweighwe0ingwqho")#сюда фтото задания
-        # self.zadanie = ctk.CTkTextbox(task_frame, font=ctk.CTkFont(size=14), wrap="word", height=400, border_width=1, border_color=("#3E454A", "#949A9F"))#тут менять рахмер задания
-        # self.zadanie.pack(fill='both', expand=True, padx=10, pady=10)
-        # self.zadanie.insert("1.0", zadanie_text)
-        # self.zadanie.configure(state="disabled")
         self.task_image = ctk.CTkLabel(task_frame)
         self.load_task_image()
         self.task_image.pack(fill='both', expand=True, padx=20, pady=10)
