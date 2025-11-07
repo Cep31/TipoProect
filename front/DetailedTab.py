@@ -15,7 +15,7 @@ class DetailedTab(ctk.CTkFrame):
 
         self.image_answers = []  #хранениt все картинrb пользователя
         self.current_image_index = -1  #индекс текущей картинки
-        self.image_answers_id =[]#хранит путь к фото пользователя
+        self.image_answers_paths =[]#хранит путь к фото пользователя
         self.current_image = None  #текущяя картинка
 
         self.task = task
@@ -122,10 +122,7 @@ class DetailedTab(ctk.CTkFrame):
                 'resolution': image.size
             }
             self.image_answers.append(file_info)
-            file_info_answers = {
-                'path': file_path
-            }
-            self.image_answers_id.append(file_info_answers)
+            self.image_answers_paths.append(file_path)
 
             self.update_controls_state()#активируем кнопки управления
 
@@ -219,6 +216,8 @@ class DetailedTab(ctk.CTkFrame):
         self.prev.configure(state="normal" if self.current_image_index > 0 else "disabled")#следущее
         self.next.configure(state="normal" if self.current_image_index < len(self.image_answers) - 1 else "disabled")#предыдущее
 
+    def get_answer(self):
+        return self.image_answers_paths
 
 # Пример использования
 if __name__ == "__main__":

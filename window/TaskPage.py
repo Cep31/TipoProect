@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import ttk
 
 from front.DetailedTab import DetailedTab
+from front.RatedDetailedTab import RatedDetailedTab
 from front.RatedTestTab import RatedTestTab
 from front.TestTab import TestTab
 from object.ScrollableNotebook import ScrollableNotebook
@@ -23,8 +24,6 @@ class TaskPage(ctk.CTkFrame):
         self.tasks_notebook.pack(fill='both', expand=True, padx=10, pady=10)
         self.tabs = []
         self.counter = 1
-
-
 
     def add_tab(self, task: Task):
         if task.get_type() == "test":
@@ -64,7 +63,12 @@ class TaskPage(ctk.CTkFrame):
         self.tasks_notebook.pack(fill='both', expand=True, padx=10, pady=10)
 
         for i in range(len(self.tabs)):
-            answer = self.tabs[i].get_answer()
-            task = self.tabs[i].task
-            self.tabs[i] = RatedTestTab(self.root, task, answer)
-            self.tasks_notebook.add(self.tabs[i], text=str(i+1))
+            tab = self.tabs[i]
+            answer = tab.get_answer()
+            task = tab.task
+            if tab.task.get_type() == "test":
+                self.tabs[i] = RatedTestTab(self.root, task, answer)
+            elif tab.task.get_type() == "detailed":
+                self.tabs[i] = RatedDetailedTab(self.root, task, answer)
+
+            self.tasks_notebook.add(self.tabs[i], text=str(i + 1))

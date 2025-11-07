@@ -13,7 +13,7 @@ class RatedTestTab(ctk.CTkFrame):
         ctk.set_default_color_theme("blue")
 
         self.answer = answer
-        self.score = task.rate(answer)
+        self.score = task.rate_test(answer)
         self.task = task
 
         self.current_task_index = 0

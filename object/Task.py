@@ -20,15 +20,20 @@ class Task:
             self._right_answer = self._json['answer']
         self._max_mark = self._json['max_mark']
 
-    def rate(self, answer): # эта функция для проверка ответа
+    def rate_detailed(self, answers_paths): # эта функция для проверка ответа
+        if not answers_paths:
+            return 'где картинки?'
+
+        return f'Ты тупой: -1/{self._max_mark}'
+
+    def rate_test(self, answer):
         if not answer:
             return 0
-        if self._type == 'test':
-            if answer == self._right_answer:
-                return self._max_mark
-            else:
-                return 0
-        return 0
+
+        if answer == self._right_answer:
+            return self._max_mark
+        else:
+            return 0
 
     def get_path(self):
         return self._path + '\\cond.png'
