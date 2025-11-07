@@ -42,7 +42,7 @@ class RatedTestTab(ctk.CTkFrame):
         AI_frame = ctk.CTkFrame(main_frame)
         AI_frame.pack(side="right", fill="both", expand=True, padx=(5,5))
 
-        self.AI_textbox = ctk.CTkLabel(
+        self.answer_task = ctk.CTkLabel(
             AI_frame,
             text="Фото не найдено",
             font=ctk.CTkFont(size=14),
@@ -52,8 +52,8 @@ class RatedTestTab(ctk.CTkFrame):
             height=200
         )
         self.load_image_explanation()
-        self.AI_textbox.pack(fill="both", expand=True, pady=10)
-        self.AI_textbox.configure(state="disabled")
+        self.answer_task.pack(fill="both", expand=True, pady=10)
+        self.answer_task.configure(state="disabled")
 
         itog_frame = ctk.CTkFrame(image_frame, height=80)#выделяем итоговый фрейм
         itog_frame.pack(side="bottom", fill="x", padx=(10, 10), pady=10)
@@ -61,15 +61,15 @@ class RatedTestTab(ctk.CTkFrame):
         answer_frame = ctk.CTkFrame(itog_frame, fg_color="transparent")
         answer_frame.pack(side="left", padx=20, pady=10)
 
-        ctk.CTkLabel(answer_frame, text=f"Ваш ответ:   {self.answer}", font=ctk.CTkFont(size=20, weight="bold")).pack(anchor="w")#ответ пользователя
+        ctk.CTkLabel(answer_frame, text=f"Ваш ответ:   {self.answer}", font=ctk.CTkFont(size=10, weight="bold")).pack(anchor="w")#ответ пользователя
 
         score_frame = ctk.CTkFrame(itog_frame, fg_color="transparent")
         score_frame.pack(side="right", padx=20, pady=5)
 
-        ctk.CTkLabel(score_frame, text=f"Ваши баллы за это задание:   {self.score}/{self.task.get_max_mark()}", font=ctk.CTkFont(size=20, weight="bold")).pack(side="left", padx = 20, pady = 10)#баллы за задание
+        ctk.CTkLabel(score_frame, text=f"Ваши баллы за это задание:   {self.score}/{self.task.get_max_mark()}", font=ctk.CTkFont(size=10, weight="bold")).pack(side="left", padx = 20, pady = 10)#баллы за задание
 
     def load_image_explanation(self):
-        path = self.task.get_path()
+        path = self.task.get_explanation_path()
         image = Image.open(path)
         image.thumbnail((400, 300), Image.Resampling.LANCZOS)
 
@@ -78,10 +78,10 @@ class RatedTestTab(ctk.CTkFrame):
             dark_image=image,
             size=image.size
         )
-        self.AI_textbox.configure(image=ctk_image, text="", fg_color="transparent")
+        self.answer_task.configure(image=ctk_image, text="", fg_color="transparent")
 
     def load_image(self):
-        path = self.task.get_explanation_path()
+        path = self.task.get_path()
         image = Image.open(path)
         image.thumbnail((400, 300), Image.Resampling.LANCZOS)
 
@@ -93,7 +93,7 @@ class RatedTestTab(ctk.CTkFrame):
         self.task_image.configure(image=ctk_image, text="", fg_color="transparent")
 
 # root = ctk.CTk()
-# root.geometry("410x950")
+# root.geometry("800x1000")
 #
 # app = RatedTestTab(-1, 2, Task("01_01_001"), root)
 # root.mainloop()

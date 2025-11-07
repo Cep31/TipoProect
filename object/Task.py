@@ -20,6 +20,8 @@ class Task:
         self._type = self._json['type']
 
     def rate(self, answer): # эта функция для проверка ответа
+        if not answer:
+            return 0
         if self._type == 'test':
             if answer == self._right_answer:
                 return self._max_mark

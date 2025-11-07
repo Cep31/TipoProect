@@ -4,7 +4,7 @@ from object.Autocheck import Autocheck
 import customtkinter as ctk
 
 root = ctk.CTk()
-root.geometry("410x950")
+root.geometry("800x950")
 
 frameHandler = FrameController(root)
 
