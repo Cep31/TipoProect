@@ -38,10 +38,10 @@ class FrameController:
 
     def show_main(self):
         self.task_page.pack_forget()
-        self.root.geometry("600x700")
+        self.root.geometry("500x700")
         self.main_page.pack()
 
     def show_tasks(self):
         self.main_page.pack_forget()
-        self.root.geometry("800x1000")
+        self.root.geometry("1000x1000")
         self.task_page.pack(fill='both', expand=True, padx=10, pady=10)

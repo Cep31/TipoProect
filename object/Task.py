@@ -14,10 +14,11 @@ class Task:
         with open(self._path + '\\problem.json', 'r') as file:
                 self._json = json.load(file)
 
-        self._right_answer = self._json['answer']
-        self._max_mark = self._json['max_mark']
-
         self._type = self._json['type']
+
+        if self._type == "test":
+            self._right_answer = self._json['answer']
+        self._max_mark = self._json['max_mark']
 
     def rate(self, answer): # эта функция для проверка ответа
         if not answer:

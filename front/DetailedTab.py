@@ -62,10 +62,10 @@ class DetailedTab(ctk.CTkFrame):
         self.image_label.pack(fill='both', expand=True, padx=20, pady=10)#пока нет картинки есть это
 
         info_frame = ctk.CTkFrame(answer_frame, corner_radius=8, fg_color=("gray90", "gray20"))#фрейм для информации о файле
-        info_frame.pack(fill='x', padx=10, pady=10)
+        #info_frame.pack(fill='x', padx=10, pady=10)
 
         self.image_info = ctk.CTkLabel(info_frame, text="", font=ctk.CTkFont(size=12), justify="left", height=40)
-        self.image_info.pack(fill='x', padx=10, pady=5)#информация о картинке
+        #self.image_info.pack(fill='x', padx=10, pady=5)#информация о картинке
 
         clear_frame = ctk.CTkFrame(answer_frame, fg_color="transparent")#фрейм для кнопок очистки
         clear_frame.pack(fill='x', padx=10, pady=5)
