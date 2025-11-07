@@ -32,16 +32,21 @@ class TaskPage(ctk.CTkFrame):
         self.finish.pack(side='right', padx=(5, 10), pady=10)  # кнопка "Ответить"
 
     def add_tab(self, task: Task):
-        if task.get_type() == "task":
+        if task.get_type() == "test":
             tab = TestTab(self.root, task)
         elif task.get_type() == "detailed":
             tab = DetailedTab(self.root, task)
         else:
             tab = TestTab(self.root, Task("01_01_001"))
 
+
         self.tabs.append(tab)
         self.tasks_notebook.add(tab, text=str(self.counter))
         self.counter += 1
+
+    def add_finish_tab(self):
+        tab = ctk.CTkFrame(self.root) # сюда суй таб "завершить"
+        self.tasks_notebook.add(tab, text="завершить")
 
     def rate(self):
         self.tasks_notebook.pack_forget()

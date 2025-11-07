@@ -7,6 +7,7 @@ class Task:
         self._path = fr'{os.getcwd()}\catalog\{self._ID}'
 
         if not os.path.exists(self._path):
+            print(f"Path {self._path} not found")
             self._ID = "01_01_001"
             self._path = fr'{os.getcwd()}\catalog\01_01_001'
 

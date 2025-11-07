@@ -29,6 +29,7 @@ class FrameController:
                    task_id = f'{(i + 1):02}_{random.randint(1, 1):02}_{random.randint(1, 3):03}'
                 tasks_id.append(task_id)
                 self.task_page.add_tab(Task(task_id))
+        self.task_page.add_finish_tab()
 
         self.show_tasks()
 
