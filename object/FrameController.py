@@ -33,15 +33,15 @@ class FrameController:
 
         self.show_tasks()
 
-    def rate(self):
-        self.task_page.rate()
+    def root_resize(self, width, height):
+        self.root.geometry(f"{width}x{height}")
 
     def show_main(self):
         self.task_page.pack_forget()
-        self.root.geometry("500x700")
+        self.root_resize(500, 700)
         self.main_page.pack()
 
     def show_tasks(self):
         self.main_page.pack_forget()
-        self.root.geometry("1000x1000")
+        self.root_resize(1000, 1000)
         self.task_page.pack(fill='both', expand=True, padx=10, pady=10)

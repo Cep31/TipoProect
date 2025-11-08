@@ -58,6 +58,8 @@ class TaskPage(ctk.CTkFrame):
         self.tasks_notebook.add(tab, text="завершить")
 
     def rate(self):
+        self.controller.root_resize(1000, 800)
+
         self.tasks_notebook.pack_forget()
         self.tasks_notebook = ScrollableNotebook(self, visible_tabs=15, style="Custom.TNotebook")
         self.tasks_notebook.pack(fill='both', expand=True, padx=10, pady=10)

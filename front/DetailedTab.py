@@ -81,7 +81,7 @@ class DetailedTab(ctk.CTkFrame):
     def load_task_image(self):
         path = self.task.get_path()
         image = Image.open(path)
-        image.thumbnail((400, 300), Image.Resampling.LANCZOS)
+        image.thumbnail((900, 9999), Image.Resampling.LANCZOS)
 
         ctk_image = ctk.CTkImage(
             light_image=image,

@@ -60,7 +60,7 @@ class RatedDetailedTab(ctk.CTkFrame):
     def load_image(self, image_label, image_path):
         try:
             image = Image.open(image_path)
-            image.thumbnail((400, 9999), Image.Resampling.LANCZOS)
+            image.thumbnail((450, 9999), Image.Resampling.LANCZOS)
             ctk_image = ctk.CTkImage(light_image=image, dark_image=image, size=image.size)
             image_label.configure(image=ctk_image, text="")
         except Exception as e:
