@@ -1,31 +1,37 @@
+from io import BytesIO
+
+from PIL import Image
 from openai import OpenAI
 import base64
 
-KEY = "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"
-MODEL = "mistralai/mistral-small-3.2-24b-instruct:free" # "google/gemini-2.0-flash-exp:free"
+KEY = "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"
+#KEY = "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"
+MODEL = "openrouter/polaris-alpha" # "google/gemini-2.0-flash-exp:free"
+# openrouter/polaris-alpha
+# mistralai/mistral-small-3.2-24b-instruct:free
 
 def content_generate(cond_path, answer_pathes, task_number):
     content = []
-    cond = encode_image(cond_path)
     content.append({
         "type": "text",
         "text": """
         Привет, Я решал задачу из ЕГЭ по профильной математике. Сможешь, пожалуйста проверить её по критериям ЕГЭ по профильной математике и оцени её по баллам.
         В первой картинке условие задачи, вторая картинка описывает критерии оценивания моей задачи, а во всех остальных - моё решение.
+        Также, поставь одну цифру - количество моих баллов в самый последний символ твоего ответа, так мне будет легче это найти
         """
     })
     content.append({
         "type": "image_url",
         "image_url": {
-            "url": f"data:image/png;base64,{cond}"
+            "url": img_to_base64_str(cond_path, 'png')
         }
     })
 
-    criteria_path = fr"C:\Users\USER\PycharmProjects\TipoProect\catalog\criteria\{task_number}"
+    criteria_path = fr"C:\Users\USER\PycharmProjects\TipoProect\catalog\criteria\{task_number}.png"
     content.append({
         "type": "image_url",
         "image_url": {
-            "url": f"data:image/png;base64,{criteria_path}"
+            "url": img_to_base64_str(criteria_path, 'png')
         }
     })
 
@@ -33,12 +39,13 @@ def content_generate(cond_path, answer_pathes, task_number):
         content.append({
             "type": "image_url",
             "image_url": {
-                "url": f"data:image/jpeg;base64,{encode_image(answer)}"
+                "url": img_to_base64_str(answer, 'jpeg')
             }
         })
 
     return content
 
+# долгая функция
 def check(id_image, answer_pathes, task_number):
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
@@ -55,12 +62,17 @@ def check(id_image, answer_pathes, task_number):
             }
         ]
     )
-    return completion
+    return completion.choices[0].message
 
-def encode_image(file_path):
-    with open(file_path, 'rb') as file:
-        encoded = base64.b64encode(file.read()).decode('utf-8')
-    return encoded
+def img_to_base64_str(img_path: str, type: str):
+    img = Image.open(img_path)
+    img.thumbnail((500, 500), Image.Resampling.LANCZOS)
+    buffered = BytesIO()
+    img.save(buffered, format=type.upper())
+    buffered.seek(0)
+    img_byte = buffered.getvalue()
+    img_str = f"data:image/{type};base64,{base64.b64encode(img_byte).decode()}"
+    return img_str
 
 response = check(r"C:\Users\USER\PycharmProjects\TipoProect\img.png", [r"C:\Users\USER\Desktop\1234.jpg", r"C:\Users\USER\Desktop\12345.jpg"], 13)
-print(response)
+print(response.content)

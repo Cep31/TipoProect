@@ -55,7 +55,7 @@ class TaskPage(ctk.CTkFrame):
         )
         finish.pack(padx=(5, 5), pady=10)  # кнопка "Ответить"
 
-        self.tasks_notebook.add(tab, text="завершить")
+        self.tasks_notebook.add(tab, text="Завершить")
 
     def rate(self):
         self.controller.root_resize(1000, 800)

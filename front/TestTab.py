@@ -41,10 +41,6 @@ class TestTab(ctk.CTkFrame):
         self.answer = ctk.CTkEntry(self.answer_frame, font=ctk.CTkFont(size=12), placeholder_text="Введите ваш ответ...", height=35)
         self.answer.pack(side='left', fill='x', expand=True, padx=5, pady=10)#поле ввода ответа
 
-        self.otvet = ctk.CTkButton( self.answer_frame, text="Ответить", font=ctk.CTkFont(size=12, weight="bold"), height=35, width=100, fg_color=("#3B8ED0", "#1F6AA5"), hover_color=("#36719F", "#144870"))
-        self.otvet.pack(side='right', padx=(5, 10), pady=10)#кнопка "Ответить"
-        #надо сделать извлечение с помощью твоего Task
-
     def load_image(self):
         path = self.task.get_path()
         image = Image.open(path)

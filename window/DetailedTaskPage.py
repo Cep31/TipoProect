@@ -30,10 +30,6 @@ class DetailedTaskPage(ttk.Frame):
 
         self.style.map("Custom.TNotebook.Tab", background=[("selected", "#f8c8c8")], font=[("selected", ('Arial', 12, 'bold'))])  # для активной вкладки
 
-    def rate(self):
-        print(123)
-        self.task.rate(1)
-        # ... дальше расписывай
 
     #дальше бога нет, или танцы с бубном для задач 13-19 с загрузкой фото
     #pip install Pillow

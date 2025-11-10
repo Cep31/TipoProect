@@ -24,7 +24,9 @@ class Task:
         if not answers_paths:
             return 'где картинки?'
 
-        return f'Ты тупой: -1/{self._max_mark}'
+        #answer = check(аргументы)
+        #return answer
+        return f'Плохо: -1/{self._max_mark}'
 
     def rate_test(self, answer):
         if not answer:
