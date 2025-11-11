@@ -24,23 +24,47 @@ class RatedTestTab(ctk.CTkFrame):
     def create_tab_1(self):
         main_frame = ctk.CTkFrame(self)
         main_frame.pack(fill="both", expand=True, padx=10, pady=10)
+        
+        left_frame_container = ctk.CTkFrame(main_frame)
+        left_frame_container.pack(side="left", fill="both", expand=True)
 
-        self.image_frame = ctk.CTkFrame(main_frame)
-        self.image_frame.pack(side="left", fill="both", expand=True)
+        #"Условие"
+        ctk.CTkLabel(
+            left_frame_container,
+            text="Условие",
+            font=ctk.CTkFont(size=16, weight="bold"),
+            text_color=("gray70", "gray30")
+        ).pack(pady=(5, 10))
+
+        self.image_frame = ctk.CTkFrame(left_frame_container)
+        self.image_frame.pack(fill="both", expand=True, padx=(0, 5))
 
         self.task_image = ctk.CTkLabel(
             self.image_frame,
             text="Фото не найдено",
             font=ctk.CTkFont(size=14),
             text_color=("gray50", "gray70"),
-            fg_color=("gray85", "gray25"), corner_radius=8, height=200
+            fg_color=("gray85", "gray25"),
+            corner_radius=8,
+            height=200
         )
-        self.task_image.pack(fill='both', expand=True, padx=20, pady=10)
+        self.task_image.pack(fill='both', expand=True, padx=10, pady=(0, 10))
         self.load_image()
         self.task_image.configure(state='disabled')
 
-        self.answer_task_frame = ctk.CTkFrame(main_frame)
-        self.answer_task_frame.pack(side="right", fill="both", expand=True, padx=(5, 5))
+        right_frame_container = ctk.CTkFrame(main_frame)
+        right_frame_container.pack(side="right", fill="both", expand=True)
+
+        #"Решение"
+        ctk.CTkLabel(
+            right_frame_container,
+            text="Решение",
+            font=ctk.CTkFont(size=16, weight="bold"),
+            text_color=("gray70", "gray30")
+        ).pack(pady=(5, 10))
+
+        self.answer_task_frame = ctk.CTkFrame(right_frame_container)
+        self.answer_task_frame.pack(fill="both", expand=True, padx=(5, 0))
 
         self.answer_task = ctk.CTkLabel(
             self.answer_task_frame,
@@ -52,7 +76,7 @@ class RatedTestTab(ctk.CTkFrame):
             height=200
         )
         self.load_image_explanation()
-        self.answer_task.pack(fill="both", expand=True, pady=10)
+        self.answer_task.pack(fill="both", expand=True, padx=10, pady=(0, 10))
         self.answer_task.configure(state="disabled")
 
         itog_frame = ctk.CTkFrame(self, height=80)  # выделяем итоговый фрейм
@@ -69,7 +93,6 @@ class RatedTestTab(ctk.CTkFrame):
 
         ctk.CTkLabel(score_frame, text=f"Ваши баллы за это задание:  {self.score}/{self.task.get_max_mark()}",
                      font=ctk.CTkFont(size=15, weight="bold")).pack(side="left", padx=20, pady=10)  # баллы за задание
-
 
     def load_image_explanation(self):
         path = self.task.get_explanation_path()
@@ -95,8 +118,8 @@ class RatedTestTab(ctk.CTkFrame):
         )
         self.task_image.configure(image=ctk_image, text="", fg_color="transparent")
 
-# root = ctk.CTk()
-# root.geometry("800x1000")
-#
-# app = RatedTestTab(-1, 2, Task("01_01_001"), root)
-# root.mainloop()
+#root = ctk.CTk()
+#root.geometry("800x1000")
+
+#app = RatedTestTab(-1, 2, Task("01_01_001"), root)
+#root.mainloop()
