@@ -2,8 +2,8 @@ import customtkinter as ctk
 
 
 class LastFirstTab(ctk.CTk):
-    def __init__(self, scores, max_scores):
-        super().__init__()
+    def __init__(self, root, scores, max_scores):
+        super().__init__(root)
 
         ctk.set_appearance_mode("dark") #делаем красоту
         ctk.set_default_color_theme("blue")
@@ -112,5 +112,6 @@ scores = [0, 3, 1, 3, 2, 0, 1, 2, 3, 1, 0, 0, 1, 0, 3, 0, 3, 1, 3, 2, 0, 1, 2, 3
 max_scores = [3, 4, 3, 4, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
               3]
 
-app = LastFirstTab(scores, max_scores)
-app.mainloop()
+#app = LastFirstTab(scores, max_scores)
+#app.mainloop()
+
