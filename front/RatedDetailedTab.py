@@ -41,13 +41,13 @@ class RatedDetailedTab(ctk.CTkFrame):
         text_title.pack(anchor="w", padx=10, pady=(10, 5))
 
         # Текстовое поле с ответом и скроллбаром
-        text_widget = ctk.CTkTextbox(text_frame, wrap="word", font=ctk.CTkFont(size=14),
+        self.text_widget = ctk.CTkTextbox(text_frame, wrap="word", font=ctk.CTkFont(size=14),
                                    fg_color=("gray80", "gray30"), border_width=1,
                                    border_color=("gray70", "gray40"), scrollbar_button_color=("gray70", "gray50"),
                                    scrollbar_button_hover_color=("gray60", "gray40"))
-        text_widget.pack(fill="both", expand=True, padx=10, pady=(0, 10))
-        text_widget.insert("1.0", self.answer_text)
-        text_widget.configure(state="disabled")  # делаем текстовое поле только для чтения
+        self.text_widget.pack(fill="both", expand=True, padx=10, pady=(0, 10))
+        self.text_widget.insert("1.0", self.answer_text)
+        self.text_widget.configure(state="disabled")  # делаем текстовое поле только для чтения
 
         bottom_frame = ctk.CTkFrame(main_frame, height=80)
         bottom_frame.pack(side="bottom", fill="x", pady=10)
@@ -65,3 +65,9 @@ class RatedDetailedTab(ctk.CTkFrame):
             image_label.configure(image=ctk_image, text="")
         except Exception as e:
             image_label.configure(text="Ошибка загрузки", image="")
+
+    def thread_answer(self):
+        # answer = check("123123", ["123123", "123123"])
+
+        #self.text_widget.configure("1.0", answer)
+        pass

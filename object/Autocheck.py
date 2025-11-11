@@ -62,7 +62,7 @@ def check(id_image, answer_pathes, task_number):
             }
         ]
     )
-    return completion.choices[0].message
+    return completion.choices[0].message.content
 
 def img_to_base64_str(img_path: str, type: str):
     img = Image.open(img_path)
@@ -75,4 +75,4 @@ def img_to_base64_str(img_path: str, type: str):
     return img_str
 
 response = check(r"C:\Users\USER\PycharmProjects\TipoProect\img.png", [r"C:\Users\USER\Desktop\1234.jpg", r"C:\Users\USER\Desktop\12345.jpg"], 13)
-print(response.content)
+print(response)
