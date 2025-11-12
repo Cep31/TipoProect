@@ -78,6 +78,3 @@ def img_to_base64_str(img_path: str, type: str):
     img_byte = buffered.getvalue()
     img_str = f"data:image/{type};base64,{base64.b64encode(img_byte).decode()}"
     return img_str
-
-# response = check(r"C:\Users\USER\PycharmProjects\TipoProect\img.png", [r"C:\Users\USER\Desktop\1234.jpg", r"C:\Users\USER\Desktop\12345.jpg"], 13)
-# print(response)

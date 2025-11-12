@@ -13,10 +13,15 @@ class MainPage(ctk.CTkFrame):
         self.tasks_count = []
         self.entry_widgets = []  #для хранения ссылок на виджеты ввода
 
-        self.task = ctk.CTkLabel(self, text="Выберите количество задач по каждому типу:", font=("Arial", 16, "bold"), text_color="#2E8B57")
-        self.task.pack(pady=(10, 20))
+        greeting_text = """
+        Добро пожаловать на тренажёр по ЕГЭ.
+        Можете выбрать любое количество заданий
+        по любой теме ЕГЭ для лучшей тренировки.
+        """
+        self.task = ctk.CTkLabel(self, text=greeting_text, font=("Arial", 16, "bold"), text_color="#2E8B57")
+        self.task.pack(pady=(0, 5))
 
-        self.scrollable_frame = ScrollableFrame(self, width=550, height=500, fg_color="transparent", scrollbar_button_color="#2E8B57", scrollbar_button_hover_color="#3CB371")
+        self.scrollable_frame = ScrollableFrame(self, width=550, height=600, fg_color="transparent", scrollbar_button_color="#2E8B57", scrollbar_button_hover_color="#3CB371")
         self.scrollable_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
         names = ["№1 Планиметрия", "№2 Векторы", "№3 Стереометрия", "№4 Простая теория вероятности",
@@ -52,10 +57,20 @@ class MainPage(ctk.CTkFrame):
             main_frame.pack(anchor="nw", fill="x", padx=5, pady=5)
 
         button_frame = ctk.CTkFrame(self, fg_color="transparent")
-        button_frame.pack(fill="x", padx=15, pady=10)
+        button_frame.pack(fill="x", padx=15, pady=1)
 
-        gotov = ctk.CTkButton(button_frame, text="Готово", command=self.ready_on_click, font=("Arial", 14, "bold"), fg_color="#2E8B57", hover_color="#3CB371", height=40, corner_radius=8)
-        gotov.pack(anchor="se", pady=10)
+        gotov = ctk.CTkButton(button_frame, text="Готово", command=self.ready_on_click, font=("Arial", 14, "bold"),
+                              fg_color="#2E8B57", hover_color="#3CB371", height=40, corner_radius=8)
+        gotov.pack(anchor="se", side="right", pady=20)
+
+        variant_generate = ctk.CTkButton(button_frame, text="Добавить каждое задание", font=("Arial", 14, "bold"),
+                                         fg_color="#2E8B57", hover_color="#3CB371", height=40, corner_radius=8,
+                                         command=self.generate_variant)
+        variant_generate.pack(anchor="sw", side="left", pady=20)
+
+    def generate_variant(self):
+        for i in range(19):
+            self.increment_value(i)
 
     def increment_value(self, index):
         current = self.tasks_count[index]

@@ -15,6 +15,8 @@ class ScrollableNotebook(ttk.Notebook):
         self.bind("<Button-4>", self._on_mousewheel_up)
         self.bind("<Button-5>", self._on_mousewheel_down)
         self.bind("<MouseWheel>", self._on_mousewheel)
+        self._on_mousewheel_down()
+        self._on_mousewheel_up()
 
         self.setup_black_style()
 
@@ -62,10 +64,10 @@ class ScrollableNotebook(ttk.Notebook):
         else:
             self._scroll_right()
 
-    def _on_mousewheel_up(self, event):
+    def _on_mousewheel_up(self):
         self._scroll_left()
 
-    def _on_mousewheel_down(self, event):
+    def _on_mousewheel_down(self):
         self._scroll_right()
 
     def _scroll_left(self):

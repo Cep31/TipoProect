@@ -38,7 +38,7 @@ class FrameController:
 
     def show_main(self):
         self.task_page.pack_forget()
-        self.root_resize(500, 700)
+        self.root_resize(550, 820)
         self.main_page.pack()
 
     def show_tasks(self):

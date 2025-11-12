@@ -1,7 +1,7 @@
 {
-  "id": "04_01_003",
+  "id": "08_01_001",
   "type": "test",
   "image": "cond.png",
-  "answer": 0,3,
+  "answer": -0.4,
   "max_mark": 1
 }

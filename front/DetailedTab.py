@@ -81,7 +81,7 @@ class DetailedTab(ctk.CTkFrame):
     def load_task_image(self):
         path = self.task.get_path()
         image = Image.open(path)
-        image.thumbnail((900, 9999), Image.Resampling.LANCZOS)
+        image.thumbnail((9999, 300), Image.Resampling.LANCZOS)
 
         ctk_image = ctk.CTkImage(
             light_image=image,
@@ -142,7 +142,7 @@ class DetailedTab(ctk.CTkFrame):
 
             # Создаем превью изображения
             image = file_info['image'].copy() # Создаем копию для изменения размера
-            max_size = (400, 300)
+            max_size = (9999, 200)
             image.thumbnail(max_size, Image.Resampling.LANCZOS)
 
             # Конвертируем для CustomTkinter

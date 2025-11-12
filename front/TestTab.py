@@ -20,7 +20,6 @@ class TestTab(ctk.CTkFrame):
 
         self.zadanie_frame = ctk.CTkFrame(self.main_frame, corner_radius=10)
         self.zadanie_frame.pack(fill='both', expand=True, pady=(0, 10))
-
         self.task_image = ctk.CTkLabel(
             self.zadanie_frame,
             text="Фото не найдено",

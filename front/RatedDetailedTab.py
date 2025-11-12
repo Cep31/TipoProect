@@ -3,6 +3,7 @@ import threading
 import customtkinter as ctk
 from PIL import Image
 
+from front.Appeal import Appeal
 from object.Autocheck import check
 from object.Task import Task
 
@@ -16,6 +17,7 @@ class RatedDetailedTab(ctk.CTkFrame):
 
         self.root = root
         self.task = task
+        self.score = 0
 
         self.create_frame()
         self.thread_answer(task.get_path(), answers_paths)
@@ -26,6 +28,13 @@ class RatedDetailedTab(ctk.CTkFrame):
 
         content_frame = ctk.CTkFrame(main_frame)  # фрейм с содержимым
         content_frame.pack(fill="both", expand=True, pady=(0, 10))
+
+        ctk.CTkLabel(
+            content_frame,
+            text="Условие",
+            font=ctk.CTkFont(size=16, weight="bold"),
+            text_color=("gray70", "gray30")
+        ).pack(pady=(5, 10))
 
         # Левая часть - изображение задания
         zadanie_image = ctk.CTkLabel(content_frame, text="изображение задания", font=ctk.CTkFont(size=14),
@@ -56,9 +65,23 @@ class RatedDetailedTab(ctk.CTkFrame):
         bottom_frame.pack(side="bottom", fill="x", pady=10)
         bottom_frame.pack_propagate(False)
 
-        #score_label = ctk.CTkLabel(bottom_frame, text=f"Ваши баллы: {self.score}/{self.max_score}",
-        #                         font=ctk.CTkFont(size=16, weight="bold"))
-        #score_label.pack(side="left", padx=20, pady=10)  # количество баллов
+        self.score_label = ctk.CTkLabel(
+            bottom_frame,
+            text=f"Ваши баллы: {self.score}/{self.task.get_max_mark()}",
+            font=ctk.CTkFont(size=16, weight="bold")
+        )
+        self.score_label.pack(side="left", padx=20, pady=10)
+
+        # кнопка апелляции
+        appeal_button = ctk.CTkButton(
+            bottom_frame,
+            text="Подать апелляцию",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="#E74C3C",
+            hover_color="#C0392B",
+            command=self.open_appeal_window
+        )
+        appeal_button.pack(side="right", padx=20, pady=10)
 
     def load_image(self, image_label, image_path):
         try:
@@ -88,3 +111,9 @@ class RatedDetailedTab(ctk.CTkFrame):
         self.text_widget.delete("1.0", "end")
         self.text_widget.insert("1.0", answer)
         self.text_widget.configure(state="disabled")
+
+    def display_score(self, score):
+        self.score_label.configure(text=f"Ваши баллы: {score}/{self.task.get_max_mark()}")
+
+    def open_appeal_window(self):
+        Appeal(self, self.score, self.task.get_max_mark())

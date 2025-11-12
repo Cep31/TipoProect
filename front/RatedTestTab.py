@@ -28,6 +28,14 @@ class RatedTestTab(ctk.CTkFrame):
         self.image_frame = ctk.CTkFrame(main_frame)
         self.image_frame.pack(side="left", fill="both", expand=True)
 
+        ctk.CTkLabel(
+            self.image_frame,
+            text="Условие",
+            font=ctk.CTkFont(size=16, weight="bold"),
+            text_color=("gray70", "gray30")
+        ).pack(pady=(5, 10))
+
+
         self.task_image = ctk.CTkLabel(
             self.image_frame,
             text="Фото не найдено",
@@ -41,6 +49,13 @@ class RatedTestTab(ctk.CTkFrame):
 
         self.answer_task_frame = ctk.CTkFrame(main_frame)
         self.answer_task_frame.pack(side="right", fill="both", expand=True, padx=(5, 5))
+
+        ctk.CTkLabel(
+            self.answer_task_frame,
+            text="Решение",
+            font=ctk.CTkFont(size=16, weight="bold"),
+            text_color=("gray70", "gray30")
+        ).pack(pady=(5, 10))
 
         self.answer_task = ctk.CTkLabel(
             self.answer_task_frame,
