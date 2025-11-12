@@ -77,8 +77,7 @@ class Appeal(ctk.CTkToplevel):
         try:
             appeal_score = int(appeal_score)
             if 0 <= appeal_score <= self.max_score:
-                self.root.score = appeal_score
-                self.root.display_score(appeal_score)
+                self.root.edit_score(appeal_score)
                 self.show_success_message()
                 appeal_window.destroy()
             else:

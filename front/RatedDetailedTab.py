@@ -112,8 +112,11 @@ class RatedDetailedTab(ctk.CTkFrame):
         self.text_widget.insert("1.0", answer)
         self.text_widget.configure(state="disabled")
 
-    def display_score(self, score):
+    def edit_score(self, score):
+        self.score = score
         self.score_label.configure(text=f"Ваши баллы: {score}/{self.task.get_max_mark()}")
+
+
 
     def open_appeal_window(self):
         Appeal(self, self.score, self.task.get_max_mark())

@@ -34,7 +34,6 @@ class TaskPage(ctk.CTkFrame):
         else:
             tab = TestTab(self.root, Task("01_01_001"))
 
-
         self.tabs.append(tab)
         self.tasks_notebook.add(tab, text=str(self.counter))
         self.counter += 1
@@ -63,6 +62,7 @@ class TaskPage(ctk.CTkFrame):
         finish.pack(padx=(5, 5), pady=10)  # кнопка "Ответить"
 
         self.tasks_notebook.add(tab, text="Завершить")
+        self.tasks_notebook.show_tabs()
 
     def add_rate_tab(self):
         max_scores = []
@@ -93,3 +93,4 @@ class TaskPage(ctk.CTkFrame):
             self.tasks_notebook.add(self.tabs[i], text=str(i + 1))
 
         self.add_rate_tab()
+        self.tasks_notebook.show_tabs()
