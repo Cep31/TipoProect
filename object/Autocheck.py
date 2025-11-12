@@ -1,3 +1,4 @@
+import time
 from io import BytesIO
 
 from PIL import Image
@@ -46,23 +47,27 @@ def content_generate(cond_path, answer_pathes, task_number):
     return content
 
 # долгая функция
-def check(id_image, answer_pathes, task_number):
-    client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=KEY,
-    )
-    content = content_generate(id_image, answer_pathes, task_number)
+# def check(id_image, answer_pathes, task_number):
+#     client = OpenAI(
+#         base_url="https://openrouter.ai/api/v1",
+#         api_key=KEY,
+#     )
+#     content = content_generate(id_image, answer_pathes, task_number)
+#
+#     completion = client.chat.completions.create(
+#         model=MODEL,
+#         messages=[
+#             {
+#                 "role": "user",
+#                 "content": content
+#             }
+#         ]
+#     )
+#     return completion.choices[0].message.content
 
-    completion = client.chat.completions.create(
-        model=MODEL,
-        messages=[
-            {
-                "role": "user",
-                "content": content
-            }
-        ]
-    )
-    return completion.choices[0].message.content
+def check(id_image, answer_pathes, task_number):
+    time.sleep(5)
+    return "13213123123"
 
 def img_to_base64_str(img_path: str, type: str):
     img = Image.open(img_path)
@@ -74,5 +79,5 @@ def img_to_base64_str(img_path: str, type: str):
     img_str = f"data:image/{type};base64,{base64.b64encode(img_byte).decode()}"
     return img_str
 
-response = check(r"C:\Users\USER\PycharmProjects\TipoProect\img.png", [r"C:\Users\USER\Desktop\1234.jpg", r"C:\Users\USER\Desktop\12345.jpg"], 13)
-print(response)
+# response = check(r"C:\Users\USER\PycharmProjects\TipoProect\img.png", [r"C:\Users\USER\Desktop\1234.jpg", r"C:\Users\USER\Desktop\12345.jpg"], 13)
+# print(response)

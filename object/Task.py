@@ -48,3 +48,6 @@ class Task:
 
     def get_explanation_path(self):
         return self._path + "\\answer.png"
+
+    def get_task_number(self):
+        return int(self._ID[:1])

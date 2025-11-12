@@ -1,6 +1,9 @@
+import threading
+
 import customtkinter as ctk
 from PIL import Image
 
+from object.Autocheck import check
 from object.Task import Task
 
 
@@ -13,9 +16,9 @@ class RatedDetailedTab(ctk.CTkFrame):
 
         self.root = root
         self.task = task
-        self.answer_text = task.rate_detailed(answers_paths)
 
         self.create_frame()
+        self.thread_answer(task.get_path(), answers_paths)
 
     def create_frame(self):
         main_frame = ctk.CTkFrame(self)
@@ -46,7 +49,7 @@ class RatedDetailedTab(ctk.CTkFrame):
                                    border_color=("gray70", "gray40"), scrollbar_button_color=("gray70", "gray50"),
                                    scrollbar_button_hover_color=("gray60", "gray40"))
         self.text_widget.pack(fill="both", expand=True, padx=10, pady=(0, 10))
-        self.text_widget.insert("1.0", self.answer_text)
+        self.text_widget.insert("1.0", "")
         self.text_widget.configure(state="disabled")  # делаем текстовое поле только для чтения
 
         bottom_frame = ctk.CTkFrame(main_frame, height=80)
@@ -66,8 +69,22 @@ class RatedDetailedTab(ctk.CTkFrame):
         except Exception as e:
             image_label.configure(text="Ошибка загрузки", image="")
 
-    def thread_answer(self):
-        # answer = check("123123", ["123123", "123123"])
+    def thread_answer(self, cond_path, answer_pathes):
+        self.text_widget.configure(state="normal")
+        self.text_widget.delete("1.0", "end")
+        self.text_widget.insert("1.0", "Проверка... Подождите.")
+        self.text_widget.configure(state="disabled")
 
-        #self.text_widget.configure("1.0", answer)
-        pass
+        def worker():
+            # отдельный потоке
+            answer = check(cond_path, answer_pathes, self.task.get_task_number())
+            # возвращаем результат в основной поток
+            self.root.after(0, self.display_answer, answer)
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def display_answer(self, answer):
+        self.text_widget.configure(state="normal")
+        self.text_widget.delete("1.0", "end")
+        self.text_widget.insert("1.0", answer)
+        self.text_widget.configure(state="disabled")
