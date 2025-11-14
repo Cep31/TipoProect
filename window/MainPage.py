@@ -8,6 +8,10 @@ class ScrollableFrame(ctk.CTkScrollableFrame):
 
 class MainPage(ctk.CTkFrame):
     def __init__(self, root, controller):
+
+        ctk.set_appearance_mode("dark")
+        ctk.set_default_color_theme("blue")
+        
         super().__init__(root)
         self.controller = controller
         self.tasks_count = []
