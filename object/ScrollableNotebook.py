@@ -5,7 +5,7 @@ import customtkinter as ctk
 def _from_rgb(rgb):
     """translates an rgb tuple of int to a tkinter friendly color code
     """
-    return "#%02x%02x%02x" % rgb
+    return "#4169E1" % rgb
 
 class ScrollableNotebook(ttk.Notebook):
     def __init__(self, master=None, visible_tabs=5, **kwargs):
