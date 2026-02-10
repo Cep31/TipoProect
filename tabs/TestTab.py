@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
-from object.Task import Task
+from backend.Task import Task
 
 
 class TestTab(ctk.CTkFrame):
@@ -20,6 +20,7 @@ class TestTab(ctk.CTkFrame):
 
         self.zadanie_frame = ctk.CTkFrame(self.main_frame, corner_radius=10)
         self.zadanie_frame.pack(fill='both', expand=True, pady=(0, 10))
+
         self.task_image = ctk.CTkLabel(
             self.zadanie_frame,
             text="Фото не найдено",
@@ -56,7 +57,7 @@ class TestTab(ctk.CTkFrame):
         answer = self.answer.get()
         if answer == '':
             return None
-        return int(answer)
+        return answer
 
 # root = ctk.CTk()
 # root.title("Задача №1")

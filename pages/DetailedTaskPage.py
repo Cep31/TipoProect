@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from object.Task import Task
+from backend.Task import Task
 import os
 from PIL import Image
 from tkinter import filedialog

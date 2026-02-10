@@ -3,7 +3,7 @@ from tkinter import filedialog, messagebox
 from PIL import Image
 import os
 
-from object.Task import Task
+from backend.Task import Task
 
 
 class DetailedTab(ctk.CTkFrame):

@@ -43,9 +43,9 @@ class ScrollableNotebook(ttk.Notebook):
                         focuscolor="none")
 
         style.map("Black.TNotebook.Tab",
-                  background=[("selected", _from_rgb((33, 40, 200))),
-                              ("active", _from_rgb((0, 10, 200))),
-                              ("!selected", _from_rgb((0, 10, 200)))],
+                  background=[("selected", _from_rgb((115, 127, 192))),
+                              ("active", _from_rgb((60, 80, 190))),
+                              ("!selected", _from_rgb((60, 80, 190)))],
                   foreground=[("selected", "white"),
                               ("active", "white"),
                               ("!selected", "white")],

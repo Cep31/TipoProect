@@ -1,13 +1,13 @@
 import customtkinter as ctk
 from tkinter import ttk
 
-from front.FinalPage import FinalPage
-from front.DetailedTab import DetailedTab
-from front.RatedDetailedTab import RatedDetailedTab
-from front.RatedTestTab import RatedTestTab
-from front.TestTab import TestTab
-from object.ScrollableNotebook import ScrollableNotebook
-from object.Task import Task
+from tabs.FinalPage import FinalPage
+from tabs.DetailedTab import DetailedTab
+from tabs.RatedDetailedTab import RatedDetailedTab
+from tabs.RatedTestTab import RatedTestTab
+from tabs.TestTab import TestTab
+from backend.ScrollableNotebook import ScrollableNotebook
+from backend.Task import Task
 
 
 class TaskPage(ctk.CTkFrame):
@@ -26,13 +26,14 @@ class TaskPage(ctk.CTkFrame):
         self.counter = 1
         self.scores = []
 
+    # tabs methods -----------------------------------------------------------------------------------------------------
     def add_tab(self, task: Task):
         if task.get_type() == "test":
             tab = TestTab(self.root, task)
         elif task.get_type() == "detailed":
             tab = DetailedTab(self.root, task)
         else:
-            tab = TestTab(self.root, Task("01_01_001"))
+            tab = TestTab(self.root, Task(1, 1, 1))
 
         self.tabs.append(tab)
         self.tasks_notebook.add(tab, text=str(self.counter))
@@ -46,7 +47,7 @@ class TaskPage(ctk.CTkFrame):
         Вернутся к решению варианта вы больше НЕ СМОЖЕТЕ
         Вы уверены, что вы хотите завершить?
         """
-        text = ctk.CTkLabel(tab, text=text, pady=20, font=ctk.CTkFont(size=30, weight="bold"))
+        text = ctk.CTkLabel(tab, text=text, pady=200, font=ctk.CTkFont(size=30, weight="bold"))
         text.pack()
 
         finish = ctk.CTkButton(
@@ -72,6 +73,7 @@ class TaskPage(ctk.CTkFrame):
         tab = FinalPage(self, self.scores, max_scores)
         self.tasks_notebook.add(tab, text="Результат")
 
+    # перестройка страницы после проверки
     def rate(self):
         self.controller.root_resize(1000, 800)
 

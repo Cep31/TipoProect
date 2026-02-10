@@ -1,5 +1,5 @@
 from tkinter import *
-from object.FrameController import FrameController
+from backend.FrameController import FrameController
 
 import customtkinter as ctk
 

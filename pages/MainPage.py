@@ -1,9 +1,6 @@
 import customtkinter as ctk
 
-
-class ScrollableFrame(ctk.CTkScrollableFrame):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
+from constants import *
 
 
 class MainPage(ctk.CTkFrame):
@@ -21,7 +18,7 @@ class MainPage(ctk.CTkFrame):
         self.task = ctk.CTkLabel(self, text=greeting_text, font=("Arial", 16, "bold"), text_color="#2E8B57")
         self.task.pack(pady=(0, 5))
 
-        self.scrollable_frame = ScrollableFrame(self, width=550, height=600, fg_color="transparent", scrollbar_button_color="#2E8B57", scrollbar_button_hover_color="#3CB371")
+        self.scrollable_frame = ctk.CTkScrollableFrame(self, width=550, height=600, fg_color="transparent", scrollbar_button_color="#2E8B57", scrollbar_button_hover_color="#3CB371")
         self.scrollable_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
         names = ["№1 Планиметрия", "№2 Векторы", "№3 Стереометрия", "№4 Простая теория вероятности",
@@ -65,16 +62,13 @@ class MainPage(ctk.CTkFrame):
 
         variant_generate = ctk.CTkButton(button_frame, text="Добавить каждое задание", font=("Arial", 14, "bold"),
                                          fg_color="#2E8B57", hover_color="#3CB371", height=40, corner_radius=8,
-                                         command=self.generate_variant)
+                                         command=self.generate_variant_on_click)
         variant_generate.pack(anchor="sw", side="left", pady=20)
 
-    def generate_variant(self):
-        for i in range(19):
-            self.increment_value(i)
-
+    # private methods       --------------------------------------------------------------------------------------------
     def increment_value(self, index):
         current = self.tasks_count[index]
-        if current < 100:
+        if current < MAX_VARIANT:
             self.tasks_count[index] = current + 1
             self.entry_widgets[index].delete(0, "end")
             self.entry_widgets[index].insert(0, str(current + 1))
@@ -94,8 +88,8 @@ class MainPage(ctk.CTkFrame):
             num_value = int(value)
             if num_value < 0:
                 num_value = 0
-            elif num_value > 100:
-                num_value = 100
+            elif num_value > MAX_VARIANT:
+                num_value = MAX_VARIANT
                 self.entry_widgets[index].delete(0, "end")
                 self.entry_widgets[index].insert(0, "100")
 
@@ -105,10 +99,16 @@ class MainPage(ctk.CTkFrame):
             self.entry_widgets[index].insert(0, "0")
             self.tasks_count[index] = 0
 
+    # on_click methods      --------------------------------------------------------------------------------------------
+    def generate_variant_on_click(self):
+        for i in range(19):
+            self.increment_value(i)
+
     def ready_on_click(self):
         self.controller.generate_problems_on_click()
         for i in range(len(self.entry_widgets)):
             self.update_from_entry(i)#тут дестрой писать
 
+    # get methods           --------------------------------------------------------------------------------------------
     def get_tasks_count(self):
         return self.tasks_count

@@ -1,0 +1,1 @@
+MAX_VARIANT = 3
