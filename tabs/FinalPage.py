@@ -14,8 +14,21 @@ class FinalPage(ctk.CTkFrame):
 
         self.create_first_tab()
 
-    def update_scores(self, score, i):
-        self.score_labels[i].configure(text=f"{score} / {self.max_scores[i]}")
+    def update_scores(self, score, index):
+        self.scores[index] = score
+        percentage = score / self.max_scores[index] if self.max_scores[index] > 0 else 0
+
+        if percentage == 1:  # максимальный балл
+            score_color = "#28A745"
+        elif percentage >= 0.5:  # больше половины
+            score_color = "#ebd700"
+        elif percentage > 0:  # есть баллы, но меньше половины
+            score_color = "#FF9800"
+        else:  # 0 баллов
+            score_color = "#DC3545"
+
+        self.score_labels[index].configure(text=f"{score} / {self.max_scores[index]}", text_color=score_color)
+        self.total_label.configure(text=f"{sum(self.scores)} / {sum(self.max_scores)}")
 
     def create_first_tab(self):
         main_frame = ctk.CTkScrollableFrame(self, corner_radius=10)#фрейм со скролбаром
@@ -106,9 +119,10 @@ class FinalPage(ctk.CTkFrame):
 
         #Форматируем общий результат
         total_text = f"{total_score} / {total_max_score} баллов"
-        ctk.CTkLabel(total_row, text=total_text,
+        self.total_label = ctk.CTkLabel(total_row, text=total_text,
                      font=ctk.CTkFont(size=16, weight="bold"),
-                     text_color="#28A745").pack(side="right", padx=50)
+                     text_color="#28A745")
+        self.total_label.pack(side="right", padx=50)
 
 
 # tasks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]

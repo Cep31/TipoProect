@@ -21,7 +21,11 @@ class Task:
 
         if self._type == "test":
             self._right_answer = self._json['answer']
+        else:
+            self._right_answer = None
         self._max_mark = self._json['max_mark']
+
+        print(self.get_id(), self._right_answer)
 
     def get_id(self):
         return f'{self.first_type:02}_{self.second_type:02}_{self.number:03}'

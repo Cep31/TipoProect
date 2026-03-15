@@ -10,7 +10,9 @@ import base64
 KEY = "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" #pisk123
 
 #MODEL = "openrouter/polaris-alpha" # платно
-MODEL = "google/gemini-2.0-flash-exp:free" # легенда
+#MODEL = "google/gemini-2.0-flash-exp:free" # больше не работает
+#MODEL = "openrouter/hunter-alpha" # стабильно отвечает, но не видит картинки
+MODEL = "openrouter/healer-alpha" # стабильно отвечает, решает медленно и странно форматирует текст     ------ пока что лучший
 #MODEL = "qwen/qwen2.5-vl-32b-instruct:free"
 #MODEL = "mistralai/mistral-small-3.1-24b-instruct:free"
 #MODEL = "allenai/molmo-2-8b:free"
@@ -103,7 +105,7 @@ def check(cond_path, answer_pathes, task_number):
 
 def img_to_base64_str(img_path: str, type: str):
     img = Image.open(img_path)
-    img.thumbnail((300, 300), Image.Resampling.LANCZOS)
+    img.thumbnail((600, 600), Image.Resampling.LANCZOS)
     buffered = BytesIO()
     img.save(buffered, format=type.upper())
     buffered.seek(0)

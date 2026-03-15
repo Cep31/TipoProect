@@ -39,7 +39,7 @@ class DetailedTaskPage(ttk.Frame):
         zadanie_frame = ttk.Frame(self, padding=20)
         zadanie_frame.pack(fill='both', expand=True)
 
-        zadanie_label = ttk.Label(zadanie_frame, text="<zadanie zadaniizaanie/.,kphsipfjpsodjvjkajvpkihb'kihspjovjspvipnwipvnpwijvipwnnihweifiowejfiwefioweo]iwehfgwejwejbvweuob]uovbwuevenioweuvbbweoubvuweibvbowuevuiwebbovubweighwe0ingwqho", font="Arial 14")
+        zadanie_label = ttk.Label(zadanie_frame, text="", font="Arial 14")
         zadanie_label.pack(fill='both', expand=True)#задание, вместо этой фигни фото
 
         answer_frame = ttk.Frame(self)

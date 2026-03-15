@@ -9,7 +9,7 @@ from backend.Task import Task
 
 
 class RatedDetailedTab(ctk.CTkFrame):
-    def __init__(self, root, task: Task, answers_paths):
+    def __init__(self, root, task: Task, answers_paths, task_page, number):
         super().__init__(root)
 
         ctk.set_appearance_mode("dark")
@@ -18,6 +18,8 @@ class RatedDetailedTab(ctk.CTkFrame):
         self.root = root
         self.task = task
         self.score = 0
+        self.task_page = task_page
+        self.number = number
 
         self.create_frame()
         self.thread_answer(task.get_path(), answers_paths)
@@ -40,7 +42,7 @@ class RatedDetailedTab(ctk.CTkFrame):
         # Заголовок условия
         ctk.CTkLabel(
             condition_card,
-            text=f"Задание №{self.task.number}",
+            text=f"Задание №{self.task.first_type}",
             font=ctk.CTkFont(size=18, weight="bold"),
             text_color=("gray20", "gray80")
         ).pack(anchor="w", padx=20, pady=(15, 5))
@@ -224,8 +226,10 @@ class RatedDetailedTab(ctk.CTkFrame):
     def display_answer(self, answer):
         self.text_widget.configure(state="normal")
         self.text_widget.delete("1.0", "end")
-        if answer[-1].isdigit():
-            self.edit_score(int(answer[-1]))
+        print("Полученный ответ ", answer.rstrip()[-1], type(answer.rstrip()[-1]))
+        if answer.rstrip()[-1].isdigit():
+            score = int(answer.rstrip()[-1])
+            self.edit_score(score)
         else:
             print("Ответ получен в неправильном формате(нет числа баллов в конце сообщения)")
 
@@ -248,6 +252,7 @@ class RatedDetailedTab(ctk.CTkFrame):
         self.score = score
         max_mark = self.task.get_max_mark()
         self.score_label.configure(text=f"{score}/{max_mark}")
+        self.task_page.get_final_page().update_scores(score, self.number)
 
         # Обновляем прогресс-бар
         progress = score / max(max_mark, 1)
@@ -260,8 +265,6 @@ class RatedDetailedTab(ctk.CTkFrame):
             self.progress_bar.configure(progress_color="#F39C12")
         else:
             self.progress_bar.configure(progress_color="#E74C3C")
-
-
 
     def open_appeal_window(self):
         Appeal(self, self.score, self.task.get_max_mark())

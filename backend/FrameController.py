@@ -24,7 +24,7 @@ class FrameController:
         tasks_count = self.main_page.get_tasks_count()
 
         for i in range(len(tasks_count)):
-            task_numbers = random.choices(list(range(1, MAX_VARIANT+1)), k=tasks_count[i])
+            task_numbers = random.sample(list(range(1, MAX_VARIANT+1)), k=tasks_count[i])
             for task_number in task_numbers:
                 task = Task(i+1, 1, task_number)
 

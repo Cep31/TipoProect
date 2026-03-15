@@ -25,6 +25,7 @@ class TaskPage(ctk.CTkFrame):
         self.tabs = []
         self.counter = 1
         self.scores = []
+        self.final_page = None
 
     # tabs methods -----------------------------------------------------------------------------------------------------
     def add_tab(self, task: Task):
@@ -71,6 +72,7 @@ class TaskPage(ctk.CTkFrame):
             max_scores.append(i.task.get_max_mark())
 
         tab = FinalPage(self, self.scores, max_scores)
+        self.final_page = tab
         self.tasks_notebook.add(tab, text="Результат")
 
     # перестройка страницы после проверки
@@ -88,7 +90,7 @@ class TaskPage(ctk.CTkFrame):
             if tab.task.get_type() == "test":
                 self.tabs[i] = RatedTestTab(self.root, task, answer)
             elif tab.task.get_type() == "detailed":
-                self.tabs[i] = RatedDetailedTab(self.root, task, answer)
+                self.tabs[i] = RatedDetailedTab(self.root, task, answer, self, i)
 
             self.scores.append(self.tabs[i].score)
 
@@ -96,3 +98,6 @@ class TaskPage(ctk.CTkFrame):
 
         self.add_rate_tab()
         self.tasks_notebook.show_tabs()
+
+    def get_final_page(self):
+        return self.final_page
