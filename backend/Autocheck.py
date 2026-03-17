@@ -5,14 +5,12 @@ from PIL import Image
 from openai import OpenAI
 import base64
 
-#KEY = "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" # 123
-#KEY = "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" # projectMGTU_free
-KEY = "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" #pisk123
+with open('.env') as f: KEY = f.read()
 
 #MODEL = "openrouter/polaris-alpha" # платно
 #MODEL = "google/gemini-2.0-flash-exp:free" # больше не работает
 #MODEL = "openrouter/hunter-alpha" # стабильно отвечает, но не видит картинки
-MODEL = "openrouter/healer-alpha" # стабильно отвечает, решает медленно и странно форматирует текст     ------ пока что лучший
+MODEL = "openrouter/healer-alpha" # решает медленно, иногда бракует ответ    ------ пока что лучший
 #MODEL = "qwen/qwen2.5-vl-32b-instruct:free"
 #MODEL = "mistralai/mistral-small-3.1-24b-instruct:free"
 #MODEL = "allenai/molmo-2-8b:free"
@@ -26,7 +24,7 @@ def explanation_content_generate(cond_path, answer_pathes, task_number):
         "text": """
         Привет, Я решал задачу из ЕГЭ по профильной математике. Сможешь, пожалуйста проверить её по критериям ЕГЭ по профильной математике и оцени её по баллам.
         В первой картинке условие задачи, вторая картинка описывает критерии оценивания моей задачи, а во всех остальных - моё решение.
-        Также, поставь одну цифру - количество моих баллов в самый последний символ твоего ответа, так мне будет легче это найти.
+        Также, поставь одну цифру - количество моих баллов в САМЫЙ ПОСДЛЕДНИЙ символ твоего ответа, это ОЧЕНЬ важно, так мне будет легче это найти.
         
         """
     })
@@ -60,7 +58,7 @@ def answer_content_generate(cond_path):
     content.append({
         "type": "text",
         "text": """
-            Привет, помоги решить задачу(её условие в картинке). Решай с полным оформлением. И напиши последним символом число '0'
+            Привет, помоги решить задачу(её условие в картинке). Решай с полным оформлением. И напиши ПОСЛЕДНИМ символом число '0' ОБЯЗАТЕЛЬНО
             """
     })
 
@@ -96,7 +94,7 @@ def check(cond_path, answer_pathes, task_number):
             }
         ]
     )
-    print(completion.choices[0].message.content)
+
     return completion.choices[0].message.content
 
 # def check(id_image, answer_pathes, task_number):

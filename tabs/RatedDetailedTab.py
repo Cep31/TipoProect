@@ -188,7 +188,7 @@ class RatedDetailedTab(ctk.CTkFrame):
         try:
             image = Image.open(image_path)
             # Сохраняем пропорции, но ограничиваем максимальный размер
-            max_width, max_height = 550, 600
+            max_width, max_height = 350, 600
             width, height = image.size
 
             if width > max_width or height > max_height:
@@ -219,21 +219,22 @@ class RatedDetailedTab(ctk.CTkFrame):
 
         def worker():
             answer = check(cond_path, answer_pathes, self.task.first_type)
-            self.root.after(0, self.display_answer, answer[:-1])
+            self.root.after(0, self.display_answer, answer)
 
         threading.Thread(target=worker, daemon=True).start()
 
     def display_answer(self, answer):
         self.text_widget.configure(state="normal")
         self.text_widget.delete("1.0", "end")
-        print("Полученный ответ ", answer.rstrip()[-1], type(answer.rstrip()[-1]))
         if answer.rstrip()[-1].isdigit():
             score = int(answer.rstrip()[-1])
+            print("EDIT SCORE: ", score)
             self.edit_score(score)
         else:
             print("Ответ получен в неправильном формате(нет числа баллов в конце сообщения)")
 
         # Форматирование ответа
+        answer = self.format_latex_code(answer[:-1])
         lines = str(answer).split('\n')
         formatted_answer = ""
         for line in lines:
@@ -268,3 +269,73 @@ class RatedDetailedTab(ctk.CTkFrame):
 
     def open_appeal_window(self):
         Appeal(self, self.score, self.task.get_max_mark())
+
+    def format_latex_code(self, text):
+        """Печатает LaTeX-выражение в консоли с заменой команд на символы"""
+        replacements = {
+            r'\frac': '',
+            r'\dfrac': '',
+            r'\tdfrac': '',
+            # ненужные элементы оформления
+            r'\boxed': '',
+            r'\left': '',
+            r'\right': '',
+            r'\quad': '',
+            r'\qquad': '',
+            r'\)': '',
+            r'\(': '',
+            r'\[': '',
+            r'\]': '',
+            r'\{': '',
+            r'\}': '',
+            r'\;': ' ',
+            r'\,': ' ',
+            r'\:': ' ',
+            r'$': '',
+            r'\begin': '(система)\n',
+            r'\end': '(конец системы)\n',
+            r'\\': '\n',
+            r'[4pt]': '',
+            r'\text': '',
+            # важные элементы
+            r'\implies': '⟹',
+            r'\notin': '∉',
+            r'\subseteq': '⊆',
+            r'\subset': '⊂',
+            r'\varnothing': '∅',
+            r'\setminus': r' \ ',
+            r'\leqslant': '⩽',
+            r'\geqslant': '⩾',
+            r'\mathbb{Z}': 'ℤ',
+            r'\mathbb{R}': 'ℝ',
+            r'\lfloor': '⌊',
+            r'\rfloor': '⌋',
+            r'\infty': '∞',
+            r'\pi': 'π',
+            r'\sin': 'sin',
+            r'\cos': 'cos',
+            r'\alpha': 'α',
+            r'\in': '∈',
+            r'\cup': '⋃',
+            r'\cap': '⋂',
+            r'\approx': '≈',
+            r'\ne': '≠',
+            r'\le': '⩽',
+            r'\leq': '⩽',
+            r'\ge': '⩾',
+            r'\geq': '⩾',
+            r'\sqrt[3]': '∛',
+            r'\sqrt[4]': '∜',
+            r'\sqrt': '√',
+            r'\pm': '±',
+            r'\cdot': '·',
+            # и скобочки
+            '}{': ')/(',
+            '{': '(',
+            '}': ')'
+        }
+
+        for old, new in replacements.items():
+            text = text.replace(old, new)
+
+        return text
