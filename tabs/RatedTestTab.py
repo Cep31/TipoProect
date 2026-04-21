@@ -147,7 +147,14 @@ class RatedTestTab(ctk.CTkFrame):
             text=f"Ваш ответ: {self.answer}",
             font=ctk.CTkFont(size=15, weight="normal"),
             text_color=("gray20", "gray80")
-        ).pack()
+        ).pack(side="left")
+
+        ctk.CTkLabel(
+            answer_frame,
+            text=f"Правильный ответ: {self.task.get_right_answer()}",
+            font=ctk.CTkFont(size=15, weight="normal"),
+            text_color=("gray20", "gray80")
+        ).pack(side="right", anchor="e", padx=50)
 
         # Баллы за задание
         score_frame = ctk.CTkFrame(bottom_content, fg_color="transparent")

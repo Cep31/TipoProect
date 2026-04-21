@@ -278,6 +278,7 @@ class RatedDetailedTab(ctk.CTkFrame):
             r'\tdfrac': '',
             # ненужные элементы оформления
             r'\boxed': '',
+            r'\boldsymbol': '',
             r'\left': '',
             r'\right': '',
             r'\quad': '',
@@ -314,6 +315,10 @@ class RatedDetailedTab(ctk.CTkFrame):
             r'\pi': 'π',
             r'\sin': 'sin',
             r'\cos': 'cos',
+            r'\tan': 'tan',
+            r'\cot': 'cot',
+            r'\arcsin': 'arcsin',
+            r'\arccos': 'arccos',
             r'\alpha': 'α',
             r'\in': '∈',
             r'\cup': '⋃',

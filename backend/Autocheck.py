@@ -8,14 +8,12 @@ import base64
 with open('.env') as f: KEY = f.read()
 
 #MODEL = "openrouter/polaris-alpha" # платно
-#MODEL = "google/gemini-2.0-flash-exp:free" # больше не работает
+#MODEL = "moonshotai/kimi-k2.6"
+MODEL = "google/gemma-4-26b-a4b-it:free"
+#MODEL = "google/gemini-2.0-flash-exp" # больше не работает
 #MODEL = "openrouter/hunter-alpha" # стабильно отвечает, но не видит картинки
-MODEL = "openrouter/healer-alpha" # решает медленно, иногда бракует ответ    ------ пока что лучший
-#MODEL = "qwen/qwen2.5-vl-32b-instruct:free"
-#MODEL = "mistralai/mistral-small-3.1-24b-instruct:free"
-#MODEL = "allenai/molmo-2-8b:free"
-#MODEL = "sourceful/riverflow-v2-max-preview"
-#MODEL = "nvidia/nemotron-nano-12b-v2-vl:free"
+#MODEL = "openrouter/healer-alpha" # больше не работает
+#MODEL = "nvidia/llama-nemotron-embed-vl-1b-v2:free"
 
 def explanation_content_generate(cond_path, answer_pathes, task_number):
     content = []
@@ -24,7 +22,8 @@ def explanation_content_generate(cond_path, answer_pathes, task_number):
         "text": """
         Привет, Я решал задачу из ЕГЭ по профильной математике. Сможешь, пожалуйста проверить её по критериям ЕГЭ по профильной математике и оцени её по баллам.
         В первой картинке условие задачи, вторая картинка описывает критерии оценивания моей задачи, а во всех остальных - моё решение.
-        Также, поставь одну цифру - количество моих баллов в САМЫЙ ПОСДЛЕДНИЙ символ твоего ответа, это ОЧЕНЬ важно, так мне будет легче это найти.
+        Также, поставь одну цифру - количество моих баллов в САМЫЙ ПОСЛЕДНИЙ символ твоего ответа, НЕ ИСПОЛЬЗУЙ НИКАКИХ СПЕЦИАЛЬНЫХ СИМВОЛОВ ИЛИ СИМВОЛОВ ДЛЯ ОФОРМЛЕНИЯ,
+         это ОЧЕНЬ важно, так мне будет легче это найти.
         
         """
     })
@@ -74,10 +73,8 @@ def answer_content_generate(cond_path):
 # долгая функция
 def check(cond_path, answer_pathes, task_number):
     if not answer_pathes:
-        print("GENERATE ANSWER")
         content = answer_content_generate(cond_path)
     else:
-        print("GENERATE EXPLANATION")
         content = explanation_content_generate(cond_path, answer_pathes, task_number)
 
     client = OpenAI(
@@ -95,6 +92,9 @@ def check(cond_path, answer_pathes, task_number):
         ]
     )
 
+    print("Prompt:", completion.usage.prompt_tokens)
+    print("Completion:", completion.usage.completion_tokens)
+    print("Total:", completion.usage.total_tokens)
     return completion.choices[0].message.content
 
 # def check(id_image, answer_pathes, task_number):

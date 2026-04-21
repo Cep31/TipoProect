@@ -26,6 +26,10 @@ class FrameController:
         for i in range(len(tasks_count)):
             task_numbers = random.sample(list(range(1, MAX_VARIANT+1)), k=tasks_count[i])
             for task_number in task_numbers:
+                if i+1 == 13:
+                    task_number = 3
+                if i+1 == 12:
+                    task_number = 2
                 task = Task(i+1, 1, task_number)
 
                 # добавление задания на след страницу

@@ -25,7 +25,7 @@ class Task:
             self._right_answer = None
         self._max_mark = self._json['max_mark']
 
-        print(self.get_id(), self._right_answer)
+        #print(self.get_id(), self._right_answer) # СТРОЧКА, КОТОРАЯ ВЫВОДИТ ПРАВИЛЬНЫЙ ОТВЕТ
 
     def get_id(self):
         return f'{self.first_type:02}_{self.second_type:02}_{self.number:03}'
@@ -45,6 +45,7 @@ class Task:
         if answer is None:
            return 0
 
+        answer = answer.replace(',', '.')
         if answer == str(self._right_answer):
            return self._max_mark
         else:
@@ -61,6 +62,9 @@ class Task:
 
     def get_explanation_path(self):
         return self._path + "\\answer.png"
+
+    def get_right_answer(self):
+        return self._right_answer
 
     #def get_task_number(self):
     #    return int(self._ID[:1])
